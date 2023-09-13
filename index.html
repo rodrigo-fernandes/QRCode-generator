@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>QRCode Generator</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='styles.css'>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="qrcode.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="box">
+            <h1>QR Code Generator</h1>
+            <hr>
+            <div class="sqrcode"></div>
+            <div class="qrcode"></div>
+            <input id="text" type="text" placeholder="Paste an URL or enter text, then press enter"/>
+            <div id="qrcode" ></div>
+        </div>
+    </div>
+    
+
+<script type="text/javascript">
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        width : 100,
+        height : 100
+    });
+    
+    function makeCode () {		
+        var elText = document.getElementById("text");
+        qrcode.makeCode(elText.value);
+    }
+    
+    makeCode();
+    
+    $("#text").
+        on("blur", function () {
+            makeCode();
+        }).
+        on("keydown", function (e) {
+            if (e.keyCode == 13) {
+                makeCode();
+            }
+        });
+    </script>
+</body>
+</html>
